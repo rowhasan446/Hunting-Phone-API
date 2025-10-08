@@ -13,7 +13,7 @@ const displayPhones = phones =>{
         console.log(phones);
 
         const phoneCard = document.createElement('div');
-        phoneCard.classList = `card w-96 bg-gray-100 shadow-xl`;
+        phoneCard.classList = `card  bg-gray-100 p-8 shadow-xl`;
         phoneCard.innerHTML = `
         <figure><img src="${phone.image}" alt="Shoes" /></figure>
                     <div class="card-body">
@@ -26,4 +26,13 @@ const displayPhones = phones =>{
         phoneContainer.appendChild(phoneCard);
     })
 }
+
+// handle serch button
+const handleSearch = () =>{
+const searchField = document.getElementById('search-field');
+const searchText = searchField.value;
+console.log(searchText);
+}
+
+
 loadPhone();
