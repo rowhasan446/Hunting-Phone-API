@@ -1,4 +1,4 @@
-const loadPhone = async (searchText, isShowAll) => {
+const loadPhone = async (searchText = '13', isShowAll) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data;
@@ -53,7 +53,27 @@ const handleShowDetails = async(id) =>{
     // load details
     const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
     const data = await res.json();
-    console.log(data);
+    const phone = data.data;
+    showPhoneDetails(phone);
+
+}
+
+const showPhoneDetails = (phone) =>{
+    console.log(phone);
+    const phoneName = document.getElementById('phone-name');
+    phoneName.innerText = phone.name;
+
+    const showDetailContainer = document.getElementById('show-detail-container');
+    showDetailContainer.innerHTML = `
+    <img src="${phone.image}" alt="Shoes" class="w-1/2 mx-auto"/ rounded-lg>
+    <P class="my-4"><span>Storage:</span> ${phone.mainFeatures.storage}</P>
+    <P class="my-4"><span>Display Size:</span> ${phone.mainFeatures.displaySize}</P>
+    <P class="my-4"><span>ChipSet:</span> ${phone.mainFeatures.chipSet}</P>
+    <P class="my-4"><span>Memory:</span> ${phone.mainFeatures.memory}</P>
+    <P class="my-4"><span>Sensors:</span> ${phone.mainFeatures.sensors.join(', ')}</P>
+    <P class="my-4"><span>Release Date:</span> ${phone.releaseDate ? phone.releaseDate : 'No Release Date Found'}</P>
+    `;
+    show_details_modal.showModal();
 }
 
 // handle serch button
@@ -80,4 +100,4 @@ const handleShowAll = () =>{
     handleSearch(true);
 }
 
-// loadPhone();
+loadPhone();
