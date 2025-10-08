@@ -40,16 +40,27 @@ const displayPhones = phones => {
                         </div>
                     </div>`;
         phoneContainer.appendChild(phoneCard);
-    })
+    });
+    // hide loading
+    toggleLoadingInfinity(false);
 }
 
 // handle serch button
 const handleSearch = () => {
+    toggleLoadingInfinity(true);
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    console.log(searchText);
+
     loadPhone(searchText);
 }
 
-
+const toggleLoadingInfinity = (isloading) =>{
+    const loadingInfinity = document.getElementById('loading-infinity');
+if(isloading){
+    loadingInfinity.classList.remove('hidden');
+}
+else{
+    loadingInfinity.classList.add('hidden');
+}
+}
 // loadPhone();
